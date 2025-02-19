@@ -26,6 +26,11 @@ public class TodoController {
     public List<Todo> getAllTodos() {
         return todoService.getAllTodos();
     }
+
+    @GetMapping("/done")
+    public List<Todo> getAllDone() {
+        return todoService.getAllDone();
+    }
    
     @GetMapping("/{id}")
     public Todo getTodoById(@PathVariable Long id) {

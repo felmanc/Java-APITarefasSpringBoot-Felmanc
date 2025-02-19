@@ -20,8 +20,16 @@ public class TodoService {
     private TodoRepository todoRepository;
 
     public List<Todo> getAllTodos() {
-        return todoRepository.findAll();
+        return todoRepository.findAllSorted().stream()
+                .filter(todo -> !todo.isRealizado())
+                .collect(Collectors.toList());
     }
+    
+    public List<Todo> getAllDone() {
+        return todoRepository.findAllSorted().stream()
+                .filter(todo -> todo.isRealizado())
+                .collect(Collectors.toList());
+    }    
     
     public Todo getTodoById(@PathVariable Long id) {
         return todoRepository.findById(id).orElse(null);
