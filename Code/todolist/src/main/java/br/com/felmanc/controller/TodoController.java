@@ -1,5 +1,6 @@
 package br.com.felmanc.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class TodoController {
 
     @PostMapping
     public List<Todo> createTodo(@RequestBody @Valid Todo todo) {
+        if (todo.getDataCriacao() == null) {
+            todo.setDataCriacao(LocalDate.now());
+        }    	
         return todoService.createTodo(todo);
     }
 
