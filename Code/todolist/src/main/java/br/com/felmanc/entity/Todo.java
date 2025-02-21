@@ -28,9 +28,13 @@ public class Todo {
 	    private String descricao;
 	    private boolean realizado;
 	    private Integer prioridade;
+	    @NotNull
+	    @NotBlank	    
 	    @Column(name = "data_criacao", nullable = false)
 	    @JsonProperty("data_criacao")
 	    private LocalDate dataCriacao = LocalDate.now();
+	    @NotNull
+	    @NotBlank	    
 	    @Column(name = "data_vencimento", nullable = false)
 	    @JsonProperty("data_vencimento")
 	    private LocalDate dataVencimento;
@@ -38,7 +42,8 @@ public class Todo {
 	    public Todo() {}
 
 		public Todo(Long id, @NotNull @NotBlank String nome, @NotNull @NotBlank String descricao, boolean realizado,
-				Integer prioridade, LocalDate dataCriacao, LocalDate dataVencimento) {
+				Integer prioridade, @NotNull @NotBlank LocalDate dataCriacao,
+				@NotNull @NotBlank LocalDate dataVencimento) {
 			this.id = id;
 			this.nome = nome;
 			this.descricao = descricao;
