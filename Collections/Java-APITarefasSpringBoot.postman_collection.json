@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "bddb9c49-0b57-4ee3-818f-bce5eb03cd88",
+		"name": "Java-API Tarefas SpringBoot-Felmanc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40272733"
+	},
+	"item": [
+		{
+			"name": "Todos-POST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "indice",
+						"value": "4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"nome\": \"Todo 1538\",\r\n        \"descricao\": \"Desc Todo 1639\",\r\n        \"realizado\": false,\r\n        \"prioridade\": 1804,\r\n        \"data_criacao\": \"2025-02-18\",\r\n        \"data_vencimento\": \"2025-02-25\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos-POST Rand",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"descricao\": \"Desc Todo {{$randomInt}}\",\r\n    \"nome\": \"Todo {{$randomInt}}\",\r\n    \"prioridade\": {{$randomInt}},\r\n    \"realizado\": false,\r\n    \"data_criacao\": \"2025-02-18\",\r\n    \"data_vencimento\": \"2025-02-25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos-List All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos-List Todo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks/todo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks",
+						"todo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos-List Done",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks/done",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks",
+						"done"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos-Swagger",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v3/api-docs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v3",
+						"api-docs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos-PUT",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"id\": 17,\r\n        \"nome\": \"Todo 1539\",\r\n        \"descricao\": \"Desc Todo 1639\",\r\n        \"realizado\": false,\r\n        \"prioridade\": 1804,\r\n        \"data_criacao\": \"2025-02-18\",\r\n        \"data_vencimento\": \"2025-02-25\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos-DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tasks/17",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks",
+						"17"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
