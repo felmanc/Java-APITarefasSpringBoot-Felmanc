@@ -18,16 +18,21 @@ import br.com.felmanc.service.TodoService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/todos")
+@RequestMapping("/tasks")
 public class TodoController {
     @Autowired
     private TodoService todoService;
 
     @GetMapping
+    public List<Todo> getAllTasks() {
+        return todoService.getAllTasks();
+    }
+
+    @GetMapping("/todo")
     public List<Todo> getAllTodos() {
         return todoService.getAllTodos();
     }
-
+    
     @GetMapping("/done")
     public List<Todo> getAllDone() {
         return todoService.getAllDone();

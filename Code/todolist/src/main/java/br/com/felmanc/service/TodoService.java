@@ -19,14 +19,18 @@ public class TodoService {
 	@Autowired
     private TodoRepository todoRepository;
 
+    public List<Todo> getAllTasks() {
+        return todoRepository.findAllSorted();
+    }	
+	
     public List<Todo> getAllTodos() {
-        return todoRepository.findAllSorted().stream()
+        return getAllTasks().stream()
                 .filter(todo -> !todo.isRealizado())
                 .collect(Collectors.toList());
     }
     
     public List<Todo> getAllDone() {
-        return todoRepository.findAllSorted().stream()
+        return getAllTasks().stream()
                 .filter(todo -> todo.isRealizado())
                 .collect(Collectors.toList());
     }    
@@ -46,7 +50,7 @@ public class TodoService {
 
         todoRepository.save(todo);
         
-        return getAllTodos();
+        return getAllTasks();
     }
     
     public List<Todo> updateTodo(@RequestBody Todo updatedTodo) {
@@ -61,12 +65,12 @@ public class TodoService {
         	throw new RuntimeException("Entity with id " + updatedTodo.getId() + " not found!");
         }
         	
-        return getAllTodos();
+        return getAllTasks();
     }
 
     public List<Todo> deleteTodo(@PathVariable Long id) {
         todoRepository.deleteById(id);
         
-        return getAllTodos();
+        return getAllTasks();
     }
 }
