@@ -20,30 +20,25 @@ public class Todo {
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
-	    @NotNull
 	    @NotBlank
 	    private String nome;
-	    @NotNull
 	    @NotBlank
 	    private String descricao;
 	    private boolean realizado;
 	    private Integer prioridade;
 	    @NotNull
-	    @NotBlank	    
 	    @Column(name = "data_criacao", nullable = false)
 	    @JsonProperty("data_criacao")
 	    private LocalDate dataCriacao = LocalDate.now();
 	    @NotNull
-	    @NotBlank	    
 	    @Column(name = "data_vencimento", nullable = false)
 	    @JsonProperty("data_vencimento")
 	    private LocalDate dataVencimento;
 	    
 	    public Todo() {}
 
-		public Todo(Long id, @NotNull @NotBlank String nome, @NotNull @NotBlank String descricao, boolean realizado,
-				Integer prioridade, @NotNull @NotBlank LocalDate dataCriacao,
-				@NotNull @NotBlank LocalDate dataVencimento) {
+		public Todo(Long id, @NotBlank String nome, @NotBlank String descricao, boolean realizado, Integer prioridade,
+				@NotNull LocalDate dataCriacao, @NotNull LocalDate dataVencimento) {
 			this.id = id;
 			this.nome = nome;
 			this.descricao = descricao;
