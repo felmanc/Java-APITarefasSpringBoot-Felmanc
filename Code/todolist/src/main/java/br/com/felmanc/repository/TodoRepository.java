@@ -10,4 +10,7 @@ import br.com.felmanc.entity.Todo;
 public interface TodoRepository extends JpaRepository<Todo, Long> {
 	@Query("SELECT t FROM Todo t ORDER BY t.prioridade DESC, t.nome ASC")
 	List<Todo> findAllSorted();
+	
+	@Query("SELECT t FROM Todo t WHERE t.realizado = :status ORDER BY t.prioridade DESC, t.nome ASC")
+	List<Todo> findSortedByStatus(boolean status);	
 }

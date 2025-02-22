@@ -22,17 +22,17 @@ public class TodoService {
     public List<Todo> getAllTasks() {
         return todoRepository.findAllSorted();
     }	
-	
+
+    private List<Todo> getAllByStatus(boolean status) {
+    	return todoRepository.findSortedByStatus(status);
+    }
+    
     public List<Todo> getAllTodos() {
-        return getAllTasks().stream()
-                .filter(todo -> !todo.isRealizado())
-                .collect(Collectors.toList());
+    	return getAllByStatus(false);
     }
     
     public List<Todo> getAllDone() {
-        return getAllTasks().stream()
-                .filter(todo -> todo.isRealizado())
-                .collect(Collectors.toList());
+    	return getAllByStatus(true);
     }    
     
     public Todo getTodoById(@PathVariable Long id) {
