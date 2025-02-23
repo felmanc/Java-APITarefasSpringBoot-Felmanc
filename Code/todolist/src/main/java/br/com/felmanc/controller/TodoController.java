@@ -3,7 +3,10 @@ package br.com.felmanc.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springdoc.api.OpenApiResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,8 +42,13 @@ public class TodoController {
     }
    
     @GetMapping("/{id}")
-    public Todo getTodoById(@PathVariable Long id) {
-        return todoService.getTodoById(id);
+    public ResponseEntity<Todo> getTodoById(@PathVariable Long id) {
+        try {
+            Todo todo = todoService.getTodoById(id);
+            return ResponseEntity.ok(todo);
+        } catch (OpenApiResourceNotFoundException ex) { 
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @PostMapping
@@ -52,12 +60,22 @@ public class TodoController {
     }
 
     @PutMapping
-    public List<Todo> updateTodo(@RequestBody Todo updatedTodo) {
-        return todoService.updateTodo(updatedTodo);
+    public ResponseEntity<List<Todo>> updateTodo(@RequestBody Todo updatedTodo) {
+        try {
+            List<Todo> todo = todoService.updateTodo(updatedTodo);
+            return ResponseEntity.ok(todo);
+        } catch (OpenApiResourceNotFoundException ex) { 
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }        
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTodo(@PathVariable Long id) {
-        todoService.deleteTodo(id);
+    public ResponseEntity<List<Todo>> deleteTodo(@PathVariable Long id) {
+        try {
+            List<Todo> todo = todoService.deleteTodo(id);
+            return ResponseEntity.ok(todo);
+        } catch (OpenApiResourceNotFoundException ex) { 
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }   
     }
 }

@@ -2,8 +2,8 @@ package br.com.felmanc.service;
 
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
+import org.springdoc.api.OpenApiResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +35,9 @@ public class TodoService {
     	return getAllByStatus(true);
     }    
     
-    public Todo getTodoById(@PathVariable Long id) {
-        return todoRepository.findById(id).orElse(null);
+    public Todo getTodoById(Long id) {
+        return todoRepository.findById(id)
+                .orElseThrow(() -> new OpenApiResourceNotFoundException("Tarefa não encontrada com o id: " + id));
     }
 
     public List<Todo> createTodo(@RequestBody Todo todo) {
@@ -54,22 +55,22 @@ public class TodoService {
     }
     
     public List<Todo> updateTodo(@RequestBody Todo updatedTodo) {
-        Todo todo = todoRepository.findById(updatedTodo.getId()).orElse(null);
-        if (todo != null) {
+    	Todo todo = getTodoById(updatedTodo.getId());
+
+    	if (todo != null) {
             todo.setNome(updatedTodo.getNome());
             todo.setDescricao(updatedTodo.getDescricao());
             todo.setRealizado(updatedTodo.isRealizado());
             todoRepository.save(todo);
-        }
-        else {
-        	throw new RuntimeException("Entity with id " + updatedTodo.getId() + " not found!");
         }
         	
         return getAllTasks();
     }
 
     public List<Todo> deleteTodo(@PathVariable Long id) {
-        todoRepository.deleteById(id);
+    	getTodoById(id);
+        
+    	todoRepository.deleteById(id);
         
         return getAllTasks();
     }
