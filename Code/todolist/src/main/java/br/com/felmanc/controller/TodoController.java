@@ -52,30 +52,30 @@ public class TodoController {
     }
 
     @PostMapping
-    public List<Todo> createTodo(@RequestBody @Valid Todo todo) {
+    public void createTodo(@RequestBody @Valid Todo todo) {
         if (todo.getDataCriacao() == null) {
             todo.setDataCriacao(LocalDate.now());
         }    	
-        return todoService.createTodo(todo);
+        todoService.createTodo(todo);
     }
 
     @PutMapping
-    public ResponseEntity<List<Todo>> updateTodo(@RequestBody Todo updatedTodo) {
+    public ResponseEntity<Void> updateTodo(@RequestBody Todo updatedTodo) {
         try {
-            List<Todo> todo = todoService.updateTodo(updatedTodo);
-            return ResponseEntity.ok(todo);
+            todoService.updateTodo(updatedTodo);
+            return ResponseEntity.noContent().build(); // Retorna 204 No Content para sucesso
         } catch (OpenApiResourceNotFoundException ex) { 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Retorna 404 Not Found sem body
         }        
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<List<Todo>> deleteTodo(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTodo(@PathVariable Long id) {
         try {
-            List<Todo> todo = todoService.deleteTodo(id);
-            return ResponseEntity.ok(todo);
-        } catch (OpenApiResourceNotFoundException ex) { 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }   
+            todoService.deleteTodo(id);
+            return ResponseEntity.noContent().build(); // Retorna 204 sem corpo
+        } catch (OpenApiResourceNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Retorna 404 sem corpo
+        }
     }
 }
