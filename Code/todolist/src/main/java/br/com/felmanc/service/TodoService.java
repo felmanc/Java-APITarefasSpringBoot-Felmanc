@@ -58,10 +58,7 @@ public class TodoService {
     	Todo todo = getTodoById(updatedTodo.getId());
 
     	if (todo != null) {
-            todo.setNome(updatedTodo.getNome());
-            todo.setDescricao(updatedTodo.getDescricao());
-            todo.setRealizado(updatedTodo.isRealizado());
-            todoRepository.save(todo);
+            todoRepository.save(updatedTodo);
         }
         	
         return getAllTasks();
